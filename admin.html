@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Beshoo Portfolio</title>
+    <link rel="shortcut icon" href="image/icon1.png" type="image/x-icon">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #0a0a0a; color: white; min-height: 100vh; }
+
+        #loginPage { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .login-box {
+            background: #1a1a1a; border: 2px solid #b74b4b; border-radius: 20px;
+            padding: 40px; width: 400px; text-align: center; box-shadow: 0 0 40px rgba(183,75,75,0.3);
+        }
+        .login-box h2 { color: #b74b4b; margin-bottom: 30px; font-size: 1.8rem; }
+        .login-box input {
+            width: 100%; padding: 12px 16px; margin-bottom: 16px; background: #2a2a2a;
+            border: 1px solid #b74b4b55; border-radius: 10px; color: white; font-size: 1rem; outline: none; transition: border 0.3s;
+        }
+        .login-box input:focus { border-color: #b74b4b; }
+        .login-btn { width: 100%; padding: 13px; background: #b74b4b; color: white; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        .login-btn:hover { background: #a03a3a; box-shadow: 0 0 20px rgba(183,75,75,0.5); }
+        .error-msg { color: #ff6b6b; margin-top: 12px; font-size: 0.9rem; }
+
+        #dashboard { display: none; }
+        .topbar { background: #1a1a1a; border-bottom: 2px solid #b74b4b33; padding: 16px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .topbar h1 { color: #b74b4b; font-size: 1.5rem; }
+        .logout-btn { padding: 8px 20px; background: transparent; border: 1px solid #b74b4b; color: #b74b4b; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .logout-btn:hover { background: #b74b4b; color: white; }
+
+        .main-content { padding: 30px; max-width: 1200px; margin: 0 auto; }
+
+        .upload-card, .projects-card, .sections-card {
+            background: #1a1a1a; border: 1px solid #b74b4b33; border-radius: 16px; padding: 30px; margin-bottom: 30px;
+        }
+        .upload-card h3, .projects-card h3, .sections-card h3 { color: #b74b4b; margin-bottom: 20px; font-size: 1.3rem; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { color: #aaa; font-size: 0.9rem; }
+        .form-group select, .form-group input[type="text"] {
+            padding: 11px 14px; background: #2a2a2a; border: 1px solid #b74b4b44;
+            border-radius: 10px; color: white; font-size: 1rem; outline: none; transition: border 0.3s;
+        }
+        .form-group select:focus, .form-group input[type="text"]:focus { border-color: #b74b4b; }
+        .form-group select option { background: #2a2a2a; }
+
+        .upload-area {
+            border: 2px dashed #b74b4b55; border-radius: 12px; padding: 40px; text-align: center;
+            cursor: pointer; transition: 0.3s; margin-bottom: 16px; position: relative;
+        }
+        .upload-area:hover { border-color: #b74b4b; background: #b74b4b11; }
+        .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+        .upload-area .icon { font-size: 3rem; margin-bottom: 10px; }
+        .upload-area p { color: #888; }
+        .upload-area p span { color: #b74b4b; }
+
+        .poster-area {
+            border: 2px dashed #b74b4b33; border-radius: 12px; padding: 20px; text-align: center;
+            cursor: pointer; transition: 0.3s; margin-bottom: 16px; position: relative; display: none;
+        }
+        .poster-area:hover { border-color: #b74b4b55; background: #b74b4b08; }
+        .poster-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+        .poster-area p { color: #666; font-size: 0.9rem; }
+        .poster-area p span { color: #b74b4b88; }
+        .poster-preview { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; margin: 8px auto 0; display: none; border: 2px solid #b74b4b44; }
+
+        .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-bottom: 16px; }
+        .preview-item { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; border: 2px solid #b74b4b44; }
+        .preview-item img, .preview-item video { width: 100%; height: 100%; object-fit: cover; }
+        .preview-item .remove-preview {
+            position: absolute; top: 4px; right: 4px; background: #b74b4b; border: none; color: white;
+            border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center;
+        }
+
+        .upload-btn { width: 100%; padding: 14px; background: #b74b4b; color: white; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        .upload-btn:hover:not(:disabled) { background: #a03a3a; box-shadow: 0 0 20px rgba(183,75,75,0.4); }
+        .upload-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .progress-bar { width: 100%; height: 8px; background: #2a2a2a; border-radius: 4px; margin-top: 12px; overflow: hidden; display: none; }
+        .progress-fill { height: 100%; background: #b74b4b; border-radius: 4px; transition: width 0.3s; width: 0%; }
+        .progress-text { text-align: center; color: #aaa; font-size: 0.9rem; margin-top: 8px; }
+
+        .sections-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .section-col h4 { color: #aaa; font-size: 1rem; margin-bottom: 12px; }
+        .section-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .section-item { display: flex; justify-content: space-between; align-items: center; background: #2a2a2a; border: 1px solid #b74b4b33; border-radius: 8px; padding: 10px 14px; }
+        .section-item span { font-size: 0.9rem; color: #ddd; }
+        .section-delete-btn { background: transparent; border: none; color: #b74b4b; cursor: pointer; font-size: 1rem; padding: 0 4px; }
+        .section-delete-btn:hover { color: #ff6b6b; }
+        .add-section-row { display: flex; gap: 8px; }
+        .add-section-input { flex: 1; padding: 10px 14px; background: #2a2a2a; border: 1px solid #b74b4b44; border-radius: 8px; color: white; font-size: 0.9rem; outline: none; }
+        .add-section-input:focus { border-color: #b74b4b; }
+        .add-section-btn { padding: 10px 18px; background: #b74b4b; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
+        .add-section-btn:hover { background: #a03a3a; }
+
+        .filter-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .filter-tab { padding: 7px 16px; background: #2a2a2a; border: 1px solid #b74b4b44; color: #aaa; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: 0.3s; }
+        .filter-tab.active, .filter-tab:hover { background: #b74b4b; color: white; border-color: #b74b4b; }
+
+        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+        .item-card { background: #2a2a2a; border: 1px solid #b74b4b33; border-radius: 12px; overflow: hidden; transition: 0.3s; }
+        .item-card:hover { border-color: #b74b4b; transform: translateY(-2px); }
+        .item-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+        .item-info { padding: 10px; }
+        .item-category { font-size: 0.75rem; color: #b74b4b; margin-bottom: 4px; }
+        .item-subcategory { font-size: 0.8rem; color: #aaa; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .item-actions { display: flex; gap: 6px; }
+        .delete-btn { flex: 1; padding: 6px; background: transparent; border: 1px solid #b74b4b55; color: #b74b4b; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
+        .delete-btn:hover { background: #b74b4b; color: white; }
+        .empty-state { text-align: center; color: #555; padding: 40px; grid-column: 1/-1; }
+
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1a1a1a; border: 1px solid #b74b4b; color: white; padding: 14px 28px; border-radius: 12px; font-size: 1rem; transition: 0.4s; z-index: 9999; box-shadow: 0 0 20px rgba(183,75,75,0.3); }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+        .toast.success { border-color: #4bb74b; }
+        .toast.error { border-color: #ff6b6b; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 600px) {
+            .form-row, .sections-row { grid-template-columns: 1fr; }
+            .main-content { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="loginPage">
+    <div class="login-box">
+        <h2>🎨 لوحة التحكم</h2>
+        <p style="color:#888; margin-bottom:24px;">Beshoo Portfolio</p>
+        <input type="email" id="emailInput" placeholder="الإيميل" />
+        <input type="password" id="passwordInput" placeholder="كلمة السر" />
+        <button class="login-btn" onclick="login()">دخول</button>
+        <p class="error-msg" id="loginError"></p>
+    </div>
+</div>
+
+<div id="dashboard">
+    <div class="topbar">
+        <h1>🎨 لوحة التحكم</h1>
+        <button class="logout-btn" onclick="logout()">خروج</button>
+    </div>
+
+    <div class="main-content">
+
+        <!-- SECTIONS MANAGER -->
+        <div class="sections-card">
+            <h3>📂 إدارة الأقسام</h3>
+            <div class="sections-row">
+                <div class="section-col">
+                    <h4>🎬 Video Editing</h4>
+                    <div class="section-list" id="videoSectionList"></div>
+                    <div class="add-section-row">
+                        <input type="text" class="add-section-input" id="newVideoSection" placeholder="اسم القسم الجديد..." />
+                        <button class="add-section-btn" onclick="addSection('video')">+ إضافة</button>
+                    </div>
+                </div>
+                <div class="section-col">
+                    <h4>🎨 Graphic Design</h4>
+                    <div class="section-list" id="graphicSectionList"></div>
+                    <div class="add-section-row">
+                        <input type="text" class="add-section-input" id="newGraphicSection" placeholder="اسم القسم الجديد..." />
+                        <button class="add-section-btn" onclick="addSection('graphic')">+ إضافة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UPLOAD -->
+        <div class="upload-card">
+            <h3>⬆️ رفع شغل جديد</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>النوع الرئيسي</label>
+                    <select id="mainCategory" onchange="updateSubCategories()">
+                        <option value="video">Video Editing</option>
+                        <option value="graphic">Graphic Design</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>القسم</label>
+                    <select id="subCategory"></select>
+                </div>
+            </div>
+
+            <div class="upload-area">
+                <input type="file" id="fileInput" multiple accept="image/*,video/*" onchange="previewFiles(event)" />
+                <div class="icon">📁</div>
+                <p>اسحب الملفات هنا أو <span>اضغط للاختيار</span></p>
+                <p style="font-size:0.8rem; margin-top:8px; color:#666;">صور وفيديوهات مدعومة</p>
+            </div>
+
+            <div class="poster-area" id="posterArea">
+                <input type="file" id="posterInput" accept="image/*" onchange="previewPoster(event)" />
+                <div style="font-size:2rem; margin-bottom:6px;">🖼️</div>
+                <p>بوستر للفيديو (اختياري) - <span>اضغط لاختيار صورة</span></p>
+                <img id="posterPreview" class="poster-preview" />
+            </div>
+
+            <div class="preview-grid" id="previewGrid"></div>
+
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text" id="progressText"></p>
+
+            <button class="upload-btn" id="uploadBtn" onclick="uploadFiles()">رفع الملفات</button>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="projects-card">
+            <h3>🗂️ الأعمال الموجودة</h3>
+            <div class="filter-tabs">
+                <div class="filter-tab active" onclick="filterItems('all', this)">الكل</div>
+                <div class="filter-tab" onclick="filterItems('video', this)">Video Editing</div>
+                <div class="filter-tab" onclick="filterItems('graphic', this)">Graphic Design</div>
+            </div>
+            <div class="items-grid" id="itemsGrid">
+                <div class="empty-state">جاري التحميل...</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDj-zO2D5FpkmlWAJwo1MpeHfOmvSu66pY",
+    authDomain: "beshoo-portfolio.firebaseapp.com",
+    projectId: "beshoo-portfolio",
+    storageBucket: "beshoo-portfolio.firebasestorage.app",
+    messagingSenderId: "1675071722",
+    appId: "1:1675071722:web:048ca19b3115fade804793"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const CLOUD_NAME = "dsywiyuch";
+const UPLOAD_PRESET = "beshoo_upload";
+
+const defaultSubCategories = {
+    video: ["Reels & Social Media Ads", "Product Ads", "Kids Animation"],
+    graphic: ["ديجتال ارت", "دمج الاشخاص", "بوسترات مدرسين ودكاترة", "تحويل الصورة لرسمة", "رسم ديجتال", "برواز رسم"]
+};
+
+let subCategories = { video: [...defaultSubCategories.video], graphic: [...defaultSubCategories.graphic] };
+let selectedFiles = [];
+let posterFile = null;
+let allItems = [];
+let currentFilter = 'all';
+
+// ====== SECTIONS ======
+async function loadSections() {
+    try {
+        const snap = await getDoc(doc(db, 'settings', 'subcategories'));
+        if (snap.exists()) subCategories = snap.data();
+    } catch(e) {}
+    renderSectionLists();
+    updateSubCategories();
+}
+
+async function saveSections() {
+    await setDoc(doc(db, 'settings', 'subcategories'), subCategories);
+}
+
+function renderSectionLists() {
+    ['video', 'graphic'].forEach(type => {
+        const list = document.getElementById(type === 'video' ? 'videoSectionList' : 'graphicSectionList');
+        list.innerHTML = subCategories[type].map((s, i) => `
+            <div class="section-item">
+                <span>${s}</span>
+                <button class="section-delete-btn" onclick="deleteSection('${type}', ${i})">🗑️</button>
+            </div>`).join('');
+    });
+}
+
+window.addSection = async function(type) {
+    const inputId = type === 'video' ? 'newVideoSection' : 'newGraphicSection';
+    const val = document.getElementById(inputId).value.trim();
+    if (!val) return;
+    if (subCategories[type].includes(val)) { showToast('القسم موجود بالفعل!', 'error'); return; }
+    subCategories[type].push(val);
+    document.getElementById(inputId).value = '';
+    await saveSections();
+    renderSectionLists();
+    updateSubCategories();
+    showToast('تم إضافة القسم ✅', 'success');
+};
+
+window.deleteSection = async function(type, index) {
+    if (!confirm('متأكد إنك عايز تمسح القسم ده؟')) return;
+    subCategories[type].splice(index, 1);
+    await saveSections();
+    renderSectionLists();
+    updateSubCategories();
+    showToast('تم حذف القسم ✅', 'success');
+};
+
+window.updateSubCategories = function() {
+    const main = document.getElementById('mainCategory').value;
+    const sub = document.getElementById('subCategory');
+    sub.innerHTML = subCategories[main].map(s => `<option value="${s}">${s}</option>`).join('');
+    document.getElementById('posterArea').style.display = main === 'video' ? 'block' : 'none';
+};
+
+// ====== AUTH ======
+onAuthStateChanged(auth, user => {
+    if (user) {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        loadSections();
+        loadItems();
+    } else {
+        document.getElementById('loginPage').style.display = 'flex';
+        document.getElementById('dashboard').style.display = 'none';
+    }
+});
+
+window.login = async function() {
+    const email = document.getElementById('emailInput').value;
+    const password = document.getElementById('passwordInput').value;
+    const errEl = document.getElementById('loginError');
+    errEl.textContent = '';
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+    } catch(e) {
+        errEl.textContent = 'الإيميل أو كلمة السر غلط!';
+    }
+};
+
+window.logout = async function() { await signOut(auth); };
+
+// ====== PREVIEW ======
+window.previewFiles = function(e) {
+    selectedFiles = Array.from(e.target.files);
+    const grid = document.getElementById('previewGrid');
+    grid.innerHTML = '';
+    selectedFiles.forEach((file, i) => {
+        const url = URL.createObjectURL(file);
+        const div = document.createElement('div');
+        div.className = 'preview-item';
+        const isVideo = file.type.startsWith('video');
+        div.innerHTML = `
+            ${isVideo ? `<video src="${url}" style="width:100%;height:100%;object-fit:cover;"></video>`
+                      : `<img src="${url}" style="width:100%;height:100%;object-fit:cover;">`}
+            <button class="remove-preview" onclick="removePreview(${i})">✕</button>`;
+        grid.appendChild(div);
+    });
+};
+
+window.removePreview = function(index) {
+    selectedFiles.splice(index, 1);
+    const dt = new DataTransfer();
+    selectedFiles.forEach(f => dt.items.add(f));
+    document.getElementById('fileInput').files = dt.files;
+    previewFiles({ target: { files: dt.files } });
+};
+
+window.previewPoster = function(e) {
+    posterFile = e.target.files[0];
+    if (posterFile) {
+        const preview = document.getElementById('posterPreview');
+        preview.src = URL.createObjectURL(posterFile);
+        preview.style.display = 'block';
+    }
+};
+
+// ====== UPLOAD ======
+async function uploadToCloudinary(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', UPLOAD_PRESET);
+    formData.append('cloud_name', CLOUD_NAME);
+    const resourceType = file.type.startsWith('video') ? 'video' : 'image';
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`, {
+        method: 'POST', body: formData
+    });
+    const data = await res.json();
+    if (!res.ok || !data.secure_url) throw new Error(data.error?.message || 'Upload failed');
+    return data;
+}
+
+window.uploadFiles = async function() {
+    if (selectedFiles.length === 0) { showToast('اختار ملف الأول!', 'error'); return; }
+
+    const mainCat = document.getElementById('mainCategory').value;
+    const subCat = document.getElementById('subCategory').value;
+    const btn = document.getElementById('uploadBtn');
+    const bar = document.getElementById('progressBar');
+    const fill = document.getElementById('progressFill');
+    const text = document.getElementById('progressText');
+
+    btn.disabled = true;
+    bar.style.display = 'block';
+
+    let posterUrl = null;
+    if (posterFile && mainCat === 'video') {
+        text.textContent = 'رفع البوستر...';
+        try {
+            const posterResult = await uploadToCloudinary(posterFile);
+            posterUrl = posterResult.secure_url;
+        } catch(e) {}
+    }
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
+        text.textContent = `رفع ${i + 1} من ${selectedFiles.length}...`;
+        fill.style.width = ((i / selectedFiles.length) * 100) + '%';
+        try {
+            const result = await uploadToCloudinary(file);
+            const docData = {
+                url: result.secure_url,
+                publicId: result.public_id,
+                type: file.type.startsWith('video') ? 'video' : 'image',
+                mainCategory: mainCat,
+                subCategory: subCat,
+                createdAt: new Date().toISOString(),
+                order: Date.now()
+            };
+            if (posterUrl) docData.poster = posterUrl;
+            await addDoc(collection(db, 'projects'), docData);
+        } catch(e) {
+            showToast('فيه مشكلة في رفع ' + file.name, 'error');
+        }
+    }
+
+    fill.style.width = '100%';
+    btn.disabled = false;
+    bar.style.display = 'none';
+    fill.style.width = '0%';
+    text.textContent = '';
+    selectedFiles = [];
+    posterFile = null;
+    document.getElementById('previewGrid').innerHTML = '';
+    document.getElementById('fileInput').value = '';
+    document.getElementById('posterInput').value = '';
+    document.getElementById('posterPreview').style.display = 'none';
+    showToast('تم الرفع بنجاح! ✅', 'success');
+    loadItems();
+};
+
+// ====== ITEMS ======
+async function loadItems() {
+    const q = query(collection(db, 'projects'), orderBy('order', 'asc'));
+    const snapshot = await getDocs(q);
+    allItems = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderItems();
+}
+
+function renderItems() {
+    const grid = document.getElementById('itemsGrid');
+    const filtered = currentFilter === 'all' ? allItems : allItems.filter(i => i.mainCategory === currentFilter);
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty-state">مفيش أعمال هنا لسه 📂</div>';
+        return;
+    }
+    grid.innerHTML = filtered.map(item => `
+        <div class="item-card">
+            ${item.type === 'video'
+                ? `<video class="item-thumb" src="${item.url}" ${item.poster ? `poster="${item.poster}"` : ''} muted></video>`
+                : `<img class="item-thumb" src="${item.url}" loading="lazy">`}
+            <div class="item-info">
+                <div class="item-category">${item.mainCategory === 'video' ? '🎬 Video' : '🎨 Graphic'}</div>
+                <div class="item-subcategory">${item.subCategory}</div>
+                <div class="item-actions">
+                    <button class="delete-btn" onclick="deleteItem('${item.id}', '${item.publicId}', '${item.type}')">🗑️ حذف</button>
+                </div>
+            </div>
+        </div>`).join('');
+}
+
+window.filterItems = function(filter, el) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    renderItems();
+};
+
+window.deleteItem = async function(id, publicId, type) {
+    if (!confirm('متأكد إنك عايز تمسح؟')) return;
+    try {
+        const resourceType = type === 'video' ? 'video' : 'image';
+        await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/destroy`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ public_id: publicId, api_key: '991117127888764' })
+        });
+    } catch(e) {}
+    await deleteDoc(doc(db, 'projects', id));
+    showToast('تم الحذف ✅', 'success');
+    loadItems();
+};
+
+window.showToast = function(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.className = `toast ${type}`, 3000);
+};
+
+document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login();
+});
+</script>
+</body>
+</html>
