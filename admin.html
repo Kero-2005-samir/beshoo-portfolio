@@ -381,6 +381,11 @@ async function uploadToCloudinary(file) {
     formData.append('file', file);
     formData.append('upload_preset', UPLOAD_PRESET);
     formData.append('cloud_name', CLOUD_NAME);
+    // ضغط تلقائي للصور
+    if (file.type.startsWith('image')) {
+        formData.append('quality', 'auto');
+        formData.append('fetch_format', 'auto');
+    }
     const resourceType = file.type.startsWith('video') ? 'video' : 'image';
     const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`, {
         method: 'POST', body: formData
