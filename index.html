@@ -220,7 +220,7 @@
             try {
                 const settingsSnap = await getDoc(doc(db, 'settings', 'subcategories'));
                 if (settingsSnap.exists()) subCategoryOrder = settingsSnap.data();
-                const q = query(collection(db, 'projects'), orderBy('order', 'asc'));
+                const q = query(collection(db, 'projects'), orderBy('order', 'desc'));
                 const snapshot = await getDocs(q);
                 allProjects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
                 document.getElementById('loadingState').style.display = 'none';
