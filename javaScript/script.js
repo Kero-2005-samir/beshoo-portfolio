@@ -1,28 +1,13 @@
-const categoryBtns = document.querySelectorAll('.category-btn');
-const projects = document.querySelectorAll('.projects');
-
-// عرض فئة واحدة عند الضغط
-categoryBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.getAttribute('data-target');
-    projects.forEach(p => {
-      p.style.display = p.classList.contains(target) ? 'block' : 'none';
-    });
-  });
-});
-
-// عرض الفئة الأولى بشكل افتراضي
-// <!-- Intersection Observer للـ fade-up animation -->
-
-projects.forEach(p => p.style.display = p.classList.contains('video') ? 'block' : 'none');
-
-const observer = new IntersectionObserver((entries) => {
+// Intersection Observer for scroll-triggered fade-up animations
+// Exposed on window so the Firebase module script can call it safely
+window.siteObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
+      window.siteObserver.unobserve(entry.target); // stop watching once visible
     }
   });
 }, { threshold: 0.15 });
 
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
+// Observe all static fade-up elements present at page load
+document.querySelectorAll('.fade-up').forEach(el => window.siteObserver.observe(el));
