@@ -4,23 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio website</title>
-    <script src="javaScript/bootstrap.bundle.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- SEO -->
+    <title>Beshoo Samir | Video Editor &amp; Graphic Designer</title>
+    <meta name="description" content="Beshoo Samir - Professional Video Editor, Graphic Designer &amp; AI Content Creator with 4+ years of experience. 50+ projects done, 100+ happy clients. Based in Egypt.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Beshoo Samir | Video Editor &amp; Graphic Designer">
+    <meta property="og:description" content="Professional Video Editor, Graphic Designer &amp; AI Content Creator. 50+ Projects, 100+ Happy Clients.">
+    <meta property="og:image" content="image/profile_image.jpeg">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
     <link rel="shortcut icon" href="image/icon1.png" type="image/x-icon">
+
+    <!-- FEATURE 8: PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
 
-    
+    <!-- Bootstrap JS -->
+    <script src="javaScript/bootstrap.bundle.js" defer></script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Beshoo Samir",
+      "jobTitle": "Video Editor & Graphic Designer",
+      "description": "Professional Video Editor, Graphic Designer and AI Content Creator with 4+ years of experience.",
+      "knowsAbout": ["Video Editing", "Graphic Design", "AI Content Creation", "Motion Graphics"],
+      "sameAs": [
+        "https://www.instagram.com/beshoosamir2",
+        "https://www.facebook.com/share/173vz5Bb4H/",
+        "https://www.tiktok.com/@beshoo.samir"
+      ]
+    }
+    </script>
 </head>
 
 <body>
+
+    <!-- FEATURE 10: Scroll Progress Bar -->
+    <div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" aria-live="polite"></div>
+
+    <!-- FEATURE 1: Fullscreen Lightbox Modal -->
+    <div id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Media viewer">
+        <button id="lb-close" aria-label="Close lightbox">&times;</button>
+        <button id="lb-prev" class="lb-nav-btn" aria-label="Previous item">&#8592;</button>
+        <div id="lightbox-inner"></div>
+        <button id="lb-next" class="lb-nav-btn" aria-label="Next item">&#8594;</button>
+        <div id="lb-counter"></div>
+    </div>
+
+    <!-- Floating WhatsApp FAB (draggable) -->
+    <a href="https://wa.me/message/MWVGAXTUXSOGP1"
+       id="whatsapp-fab"
+       class="whatsapp-fab"
+       aria-label="Chat on WhatsApp"
+       target="_blank"
+       rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.559 4.126 1.534 5.856L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.854-1.314l-.348-.207-3.61.941.963-3.498-.227-.36A9.6 9.6 0 0112 2.4 9.6 9.6 0 0121.6 12 9.6 9.6 0 0112 21.6z"/>
+        </svg>
+        <span class="fab-tooltip">Chat on WhatsApp</span>
+    </a>
+
+    <!-- FEATURE 5: Back-to-Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+    </button>
+
     <main class="container-fluid g-0">
-        <!-- navbar section -->
-        <div class="first">
+
+        <!-- Navbar -->
+        <div class="first" id="navbar-wrap">
             <header class="pt-3">
                 <nav class="navbar navbar-expand-md navbar-dark col-lg-10 mx-auto mb-3">
                     <div class="container-fluid">
@@ -33,16 +104,16 @@
                         <div class="collapse navbar-collapse offset-md-4 offset-lg-5 offset-xl-6" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link focus_color active fs-5 navbar-item text-center me-2" aria-current="page" href="#home-page">Home</a>
+                                    <a class="nav-link focus_color fs-5 navbar-item text-center me-2" aria-current="page" href="#home-page" data-section="home-page">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active fs-5 navbar-item text-center me-2" href="#Designs">Designs</a>
+                                    <a class="nav-link fs-5 navbar-item text-center me-2" href="#Designs" data-section="Designs">Designs</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active fs-5 navbar-item text-center me-2" href="#about">About</a>
+                                    <a class="nav-link fs-5 navbar-item text-center me-2" href="#about" data-section="about">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active fs-5 navbar-item text-center me-2" href="#home-page">Contact</a>
+                                    <a class="nav-link fs-5 navbar-item text-center me-2" href="#contact" data-section="contact">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -51,66 +122,107 @@
             </header>
         </div>
 
-        <!-- image and details section -->
+        <!-- Hero Section -->
         <section class="py-5" id="home-page">
+            <!-- FEATURE 12: Hero Animated Orbs -->
+            <div class="hero-orbs" aria-hidden="true">
+                <div class="hero-orb"></div>
+                <div class="hero-orb"></div>
+                <div class="hero-orb"></div>
+            </div>
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 text-center fade-up delay-1">
-                        <img src="image/profile_image.jpeg" class="img-fluid rounded-circle"
-                            style="width:80%; height:70%; box-shadow: 0px 0px 30px #b74b4b;">
+                        <img src="image/profile_image.jpeg"
+                             alt="Beshoo Samir – Video Editor &amp; Graphic Designer"
+                             class="img-fluid rounded-circle"
+                             style="width:80%; height:70%; box-shadow: 0px 0px 30px #b74b4b;">
                     </div>
                     <div class="col-lg-6 home-content fade-up delay-2">
                         <h1>Hi, it's <span>Beshoo</span></h1>
                         <h3 class="typing-text">I'm a <span></span></h3>
                         <p>I turn ideas into professional videos that grab attention and help brands stand out. I offer
-                            full solutions filming, directing, editing, and AI powered production focusing on modern
+                            full solutions — filming, directing, editing, and AI‑powered production — focusing on modern
                             visual content that makes an impact and reflects each brand's identity.</p>
                         <div class="home-icons">
-                            <a href="https://wa.me/message/MWVGAXTUXSOGP1"><i class="fa-brands fa-whatsapp"></i></a>
-                            <a href="https://www.facebook.com/share/173vz5Bb4H/"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="https://www.instagram.com/beshoosamir2?igsh=anZmdTN1anlwOXFx"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="https://www.tiktok.com/@beshoo.samir?_r=1&_t=ZS-94Wpgg7Gf36"><i class="fa-brands fa-tiktok"></i></a>
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/message/MWVGAXTUXSOGP1" aria-label="Chat on WhatsApp" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.559 4.126 1.534 5.856L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.854-1.314l-.348-.207-3.61.941.963-3.498-.227-.36A9.6 9.6 0 0112 2.4 9.6 9.6 0 0121.6 12 9.6 9.6 0 0112 21.6z"/>
+                                </svg>
+                            </a>
+                            <!-- Facebook -->
+                            <a href="https://www.facebook.com/share/173vz5Bb4H/" aria-label="Facebook Page" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </a>
+                            <!-- Instagram -->
+                            <a href="https://www.instagram.com/beshoosamir2?igsh=anZmdTN1anlwOXFx" aria-label="Instagram Profile" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                                </svg>
+                            </a>
+                            <!-- TikTok -->
+                            <a href="https://www.tiktok.com/@beshoo.samir?_r=1&amp;_t=ZS-94Wpgg7Gf36" aria-label="TikTok Profile" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
+                                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                                </svg>
+                            </a>
                         </div>
-                        <a href="https://wa.me/message/MWVGAXTUXSOGP1" class="btn">Contact me</a>
+                        <a href="https://wa.me/message/MWVGAXTUXSOGP1" class="btn" target="_blank" rel="noopener noreferrer">Contact me</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- projects -->
+        <!-- Projects / Designs -->
         <section id="Designs" class="py-5">
             <div class="container">
                 <h2 class="text-center mb-5 fade-up" style="color: #b74b4b;">My Projects</h2>
                 <div class="row mb-4 text-center fade-up delay-1">
                     <div class="col-md-6 mb-3">
-                        <button class="btn w-100 category-btn active-cat" data-target="video"
+                        <button id="btn-video" class="btn w-100 category-btn active-cat" data-target="video"
                             onclick="showCategory('video', this)">Video Editing</button>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <button class="btn w-100 category-btn" data-target="graphic"
+                        <button id="btn-graphic" class="btn w-100 category-btn" data-target="graphic"
                             onclick="showCategory('graphic', this)">Graphic Design</button>
                     </div>
                 </div>
-                <div id="loadingState" class="text-center py-5">
-                    <div class="spinner-border" style="color:#b74b4b; width:3rem; height:3rem;" role="status"></div>
-                    <p class="mt-3" style="color:#888;">جاري التحميل...</p>
+
+                <!-- FEATURE 7: Subcategory Quick-Jump Pills -->
+                <div id="subcat-pills" role="navigation" aria-label="Jump to subcategory"></div>
+
+                <!-- FEATURE 3: Skeleton Loading Cards -->
+                <div id="loadingState" class="py-3">
+                    <div class="skeleton-grid">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
                 </div>
                 <div id="projectsContainer" style="display:none;"></div>
             </div>
         </section>
 
-        <!-- about -->
+        <!-- About -->
         <section id="about" class="py-5">
             <div class="container">
                 <h2 class="text-center mb-5 fade-up" style="color: #b74b4b;">About Me</h2>
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6 text-center fade-up delay-1">
-                        <img src="image/1773101440747-019cd514-26d7-753a-8432-1c24b1a6573e (1).png" class="img-fluid about-img"
-                            style="width:80%; border-radius: 20px; box-shadow: 0px 0px 30px #b74b4b;">
+                        <img src="image/1773101440747-019cd514-26d7-753a-8432-1c24b1a6573e (1).png"
+                             alt="Beshoo Samir creative portfolio showcase"
+                             class="img-fluid about-img"
+                             loading="lazy"
+                             style="width:80%; border-radius: 20px; box-shadow: 0px 0px 30px #b74b4b;">
                     </div>
                     <div class="col-lg-6 fade-up delay-2">
                         <h3 style="color:#b74b4b; font-size:2rem; margin-bottom:16px;">Beshoo Samir</h3>
-                        <h5 style="color:#aaa; margin-bottom:20px; font-size:1.1rem;">Graphic Designer & Video Editor</h5>
+                        <h5 style="color:#aaa; margin-bottom:20px; font-size:1.1rem;">Graphic Designer &amp; Video Editor</h5>
                         <p style="font-size:1.4rem; line-height:1.9; color:#ddd; margin-bottom:20px; direction: rtl;" class="arabic">
                             أنا Beshoo Samir، مونتير فيديو ومصمم جرافيك متخصص في صناعة المحتوى البصري باستخدام أحدث
                             تقنيات الذكاء الاصطناعي (AI). لدي خبرة أكثر من 3 سنوات في التصميم والمونتاج وصناعة الفيديو،
@@ -119,43 +231,43 @@
                         </p>
                         <h2 style="direction: rtl;"> مجالات عملي</h2>
                         <h3 style="direction: rtl;"> صناعة الفيديو والإعلانات</h3>
-                        <ul style="direction: rtl; font-size: 20px;margin-right: 30px;">
+                        <ul style="direction: rtl; font-size: 20px; margin-right: 30px;">
                             <li>إنشاء فيديوهات وإعلانات للمنتجات باستخدام الذكاء الاصطناعي.</li>
                             <li>تحريك الصور وتحويلها إلى مشاهد فيديو.</li>
                             <li>إنشاء Voice Over بالذكاء الاصطناعي.</li>
                             <li>مونتاج الفيديوهات والإعلانات بشكل احترافي.</li>
                         </ul>
                         <h3 style="direction: rtl;">🎨 التصميم والطباعة</h3>
-                        <ul style="direction: rtl; font-size: 20px;margin-right: 30px;">
+                        <ul style="direction: rtl; font-size: 20px; margin-right: 30px;">
                             <li>تصميم Digital Art وطباعة تابلوهات فنية.</li>
                             <li>تحويل الصور إلى رسومات مرسومة باليد.</li>
                             <li>تصميم بوسترات وإعلانات للسوشيال ميديا.</li>
                             <li>إنشاء صور إعلانية احترافية للمنتجات باستخدام AI.</li>
                         </ul>
                         <h3 style="direction: rtl;"> صناعة المحتوى بالذكاء الاصطناعي</h3>
-                        <ul style="direction: rtl; font-size: 20px;margin-right: 30px;">
+                        <ul style="direction: rtl; font-size: 20px; margin-right: 30px;">
                             <li>إنتاج قصص كرتونية وفيديوهات باستخدام AI.</li>
                             <li>تحويل السكريبت إلى مشاهد فيديو كاملة.</li>
                             <li>دمج الأشخاص داخل مشاهد مختلفة بأسلوب سينمائي.</li>
                         </ul>
 
-                        <!-- Stats -->
-                        <div class="row text-center mb-4 fade-up delay-3">
+                        <!-- FEATURE 2: Animated Stats -->
+                        <div class="row text-center mb-4 mt-4 fade-up delay-3" id="stats-row">
                             <div class="col-4">
                                 <div class="about-stat">
-                                    <h3 style="color:#b74b4b; font-size:2rem; font-weight:bold;">4+</h3>
+                                    <h3 style="color:#b74b4b; font-size:2rem; font-weight:bold;"><span class="stat-num" data-target="4" data-suffix="+">4+</span></h3>
                                     <p style="color:#aaa; font-size:0.9rem;">Years Experience</p>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="about-stat">
-                                    <h3 style="color:#b74b4b; font-size:2rem; font-weight:bold;">50+</h3>
+                                    <h3 style="color:#b74b4b; font-size:2rem; font-weight:bold;"><span class="stat-num" data-target="50" data-suffix="+">50+</span></h3>
                                     <p style="color:#aaa; font-size:0.9rem;">Projects Done</p>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="about-stat">
-                                    <h3 style="color:#b74b4b; font-size:2rem; font-weight:bold;">100+</h3>
+                                    <h3 style="color:#b74b4b; font-size:2rem; font-weight:bold;"><span class="stat-num" data-target="100" data-suffix="+">100+</span></h3>
                                     <p style="color:#aaa; font-size:0.9rem;">Happy Clients</p>
                                 </div>
                             </div>
@@ -172,6 +284,52 @@
             </div>
         </section>
 
+        <!-- Contact - Social Links Only -->
+        <section id="contact" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4 fade-up" style="color: #b74b4b;">Contact Me</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center fade-up delay-1">
+                        <p style="font-size:1.15rem; color:#aaa; margin-bottom:2.5rem;">
+                            Reach me directly on social media:
+                        </p>
+                        <div class="contact-links">
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/message/MWVGAXTUXSOGP1" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32" aria-hidden="true">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.559 4.126 1.534 5.856L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.854-1.314l-.348-.207-3.61.941.963-3.498-.227-.36A9.6 9.6 0 0112 2.4 9.6 9.6 0 0121.6 12 9.6 9.6 0 0112 21.6z"/>
+                                </svg>
+                                <span>WhatsApp</span>
+                            </a>
+                            <!-- Instagram -->
+                            <a href="https://www.instagram.com/beshoosamir2?igsh=anZmdTN1anlwOXFx" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="Follow on Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32" aria-hidden="true">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                                </svg>
+                                <span>Instagram</span>
+                            </a>
+                            <!-- Facebook -->
+                            <a href="https://www.facebook.com/share/173vz5Bb4H/" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="Find on Facebook">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32" aria-hidden="true">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                                <span>Facebook</span>
+                            </a>
+                            <!-- TikTok -->
+                            <a href="https://www.tiktok.com/@beshoo.samir?_r=1&amp;_t=ZS-94Wpgg7Gf36" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="Follow on TikTok">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32" aria-hidden="true">
+                                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                                </svg>
+                                <span>TikTok</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
         <footer class="row" style="background: #0d0d0d; border-top: 1px solid #b74b4b44; padding: 20px 0; text-align:center;">
             <div class="container">
                 <p style="color:#444; font-size:0.9rem; margin:0;">
@@ -183,8 +341,11 @@
 
     </main>
 
+    <!--
+        script.js loaded FIRST (synchronous) so window.siteObserver is defined
+        before the module script below tries to call it.
+    -->
     <script src="javaScript/script.js"></script>
-
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -200,89 +361,492 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        const db  = getFirestore(app);
 
-        let allProjects = [];
+        let allProjects    = [];
         let currentCategory = 'video';
 
         let subCategoryOrder = {
-            video: ["Reels & Social Media Ads", "Product Ads", "Kids Animation"],
+            video:   ["Reels & Social Media Ads", "Product Ads", "Kids Animation"],
             graphic: ["ديجتال ارت", "دمج الاشخاص", "بوسترات مدرسين ودكاترة", "تحويل الصورة لرسمة", "رسم ديجتال", "برواز رسم"]
         };
 
         const subCategoryTitles = {
             "Reels & Social Media Ads": "Reels & Social Media Ads<br>ريلز واعلانات",
-            "Product Ads": "Product Ads<br>تحويل المنتج لفيديو اعلانى",
-            "Kids Animation": "Kids Animation<br>تحويل فكرتك لقصة كرتونية"
+            "Product Ads":              "Product Ads<br>تحويل المنتج لفيديو اعلانى",
+            "Kids Animation":           "Kids Animation<br>تحويل فكرتك لقصة كرتونية"
         };
+
+        /* Cloudinary auto-optimise */
+        function optimizeUrl(url, type) {
+            if (!url || !url.includes('res.cloudinary.com')) return url;
+            const transform = type === 'video' ? 'q_auto,f_auto,w_720' : 'q_auto,f_auto,w_600';
+            return url.replace('/upload/', `/upload/${transform}/`);
+        }
+
+        /* sessionStorage caching */
+        const CACHE_KEY_PROJECTS = 'beshoo_projects_v1';
+        const CACHE_KEY_SETTINGS = 'beshoo_settings_v1';
 
         async function loadProjects() {
             try {
-                const settingsSnap = await getDoc(doc(db, 'settings', 'subcategories'));
-                if (settingsSnap.exists()) subCategoryOrder = settingsSnap.data();
-                const q = query(collection(db, 'projects'), orderBy('order', 'desc'));
-                const snapshot = await getDocs(q);
-                allProjects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                document.getElementById('loadingState').style.display = 'none';
-                document.getElementById('projectsContainer').style.display = 'block';
-                renderProjects(currentCategory);
+                const cachedProjects = sessionStorage.getItem(CACHE_KEY_PROJECTS);
+                const cachedSettings = sessionStorage.getItem(CACHE_KEY_SETTINGS);
+                if (cachedProjects && cachedSettings) {
+                    allProjects      = JSON.parse(cachedProjects);
+                    subCategoryOrder = JSON.parse(cachedSettings);
+                    showProjects();
+                    fetchAndCache().catch(() => {});
+                } else {
+                    await fetchAndCache();
+                }
             } catch (e) {
                 document.getElementById('loadingState').innerHTML =
                     '<p style="color:#888;">مفيش أعمال لسه، ابدأ الرفع من لوحة التحكم 🎨</p>';
             }
         }
 
+        async function fetchAndCache() {
+            const settingsSnap = await getDoc(doc(db, 'settings', 'subcategories'));
+            if (settingsSnap.exists()) subCategoryOrder = settingsSnap.data();
+
+            const q        = query(collection(db, 'projects'), orderBy('order', 'desc'));
+            const snapshot = await getDocs(q);
+            allProjects    = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+
+            sessionStorage.setItem(CACHE_KEY_PROJECTS, JSON.stringify(allProjects));
+            sessionStorage.setItem(CACHE_KEY_SETTINGS, JSON.stringify(subCategoryOrder));
+
+            showProjects();
+        }
+
+        function showProjects() {
+            document.getElementById('loadingState').style.display   = 'none';
+            document.getElementById('projectsContainer').style.display = 'block';
+            renderProjects(currentCategory);
+        }
+
+        const PREVIEW_LIMIT = 5;
+        window._portfolioData = { allProjects, subCategoryOrder };
+
+        /* Lightbox global item list */
+        let _lbItems = [];
+        let _lbIdx   = 0;
+
+        const COPY_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>`;
+
+        function buildItemHtml(item, i, aspectRatio, lbIndex) {
+            const delay    = (i % 4) + 1;
+            const mediaUrl = optimizeUrl(item.url, item.type);
+
+            let posterUrl = '';
+            if (item.poster) {
+                posterUrl = optimizeUrl(item.poster, 'image');
+            } else if (item.type === 'video' && item.url && item.url.includes('res.cloudinary.com')) {
+                posterUrl = item.url
+                    .replace('/video/upload/', '/video/upload/q_auto,f_jpg,w_600,so_0/')
+                    .replace(/\.(mp4|mov|avi|webm|mkv)(\?.*)?$/i, '.jpg');
+            }
+
+            const mediaHtml = item.type === 'video'
+                ? `<div class="video-wrapper" style="width:100%;height:100%;" onclick="openLightbox(${lbIndex})">
+                       ${posterUrl
+                           ? `<img src="${posterUrl}" alt="Video thumbnail" loading="lazy" class="video-poster">`
+                           : `<div class="video-poster-placeholder"></div>`}
+                       <button class="play-btn" aria-label="Play video in fullscreen" onclick="event.stopPropagation();openLightbox(${lbIndex})">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="36" height="36" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                       </button>
+                   </div>`
+                : `<img src="${mediaUrl}" alt="Graphic design work" loading="lazy"
+                        style="width:100%;height:100%;object-fit:contain;display:block;"
+                        onclick="openLightbox(${lbIndex})">`;
+
+            const rawUrl = item.url || '';
+            return `
+                <div class="col-6 col-md-4 col-lg-3 fade-up delay-${delay}">
+                    <div class="project-card" style="aspect-ratio:${aspectRatio};">
+                        ${mediaHtml}
+                        <button class="copy-btn" aria-label="Copy link" onclick="copyLink(event,'${rawUrl.replace(/'/g,"\\'")}')">
+                            ${COPY_SVG} Copy
+                        </button>
+                    </div>
+                </div>`;
+        }
+
+        function buildSubcatRow(rowId, items, aspectRatio, showAll, lbOffset) {
+            let html = `<div class="row mb-4 g-3" id="${rowId}">`;
+            const visible = showAll ? items : items.slice(0, PREVIEW_LIMIT);
+            visible.forEach((item, i) => { html += buildItemHtml(item, i, aspectRatio, lbOffset + i); });
+
+            if (!showAll && items.length > PREVIEW_LIMIT) {
+                const remaining = items.length - PREVIEW_LIMIT;
+                html += `
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="project-card toggle-card" style="aspect-ratio:${aspectRatio};"
+                             onclick="window._showMore('${rowId}')">
+                            <div class="toggle-card-inner">
+                                <span class="toggle-card-count">+${remaining}</span>
+                                <span class="toggle-card-label">المزيد</span>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+
+            if (showAll && items.length > PREVIEW_LIMIT) {
+                html += `
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="project-card toggle-card toggle-card--less" style="aspect-ratio:${aspectRatio};"
+                             onclick="window._showLess('${rowId}')">
+                            <div class="toggle-card-inner">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+                                <span class="toggle-card-label">عرض أقل</span>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+
+            html += `</div>`;
+            return html;
+        }
+
         function renderProjects(category) {
             const container = document.getElementById('projectsContainer');
-            const filtered = allProjects.filter(p => p.mainCategory === category);
+            const filtered  = allProjects.filter(p => p.mainCategory === category);
+
             if (filtered.length === 0) {
                 container.innerHTML = '<p class="text-center py-5" style="color:#888;">مفيش أعمال هنا لسه 📂</p>';
+                updateSubcatPills(category, []);
                 return;
             }
+
+            window._portfolioData = { allProjects, subCategoryOrder };
+
             const groups = {};
             filtered.forEach(item => {
                 if (!groups[item.subCategory]) groups[item.subCategory] = [];
                 groups[item.subCategory].push(item);
             });
-            const orderedKeys = subCategoryOrder[category].filter(k => groups[k]);
-            const isVideo = category === 'video';
-            const aspectRatio = isVideo ? '9/16' : '1/1';
-            let html = '';
-            for (const subCat of orderedKeys) {
-                const items = groups[subCat];
-                html += `<h4 class="fs-1 ms-2 text-center my-4 fade-up">${subCategoryTitles[subCat] || subCat}</h4>`;
-                html += `<div class="row mb-4 g-3">`;
-                items.forEach((item, i) => {
-                    const delay = (i % 4) + 1;
-                    html += `
-                        <div class="col-6 col-md-4 col-lg-3 fade-up delay-${delay}">
-                            <div style="background-color:white; border: solid 3.5px #b74b4b; border-radius: 15px; overflow: hidden; aspect-ratio: ${aspectRatio}; cursor:pointer; transition: transform 0.2s ease, box-shadow 0.2s ease;"
-                                onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 6px 20px rgba(183,75,75,0.4)'"
-                                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
-                                ${item.type === 'video'
-                                    ? `<video src="${item.url}" ${item.poster ? `poster="${item.poster}"` : ''} controls style="width:100%; height:100%; display:block; object-fit:contain;"></video>`
-                                    : `<img src="${item.url}" style="width:100%; height:100%; object-fit:contain; display:block;">`
-                                }
-                            </div>
-                        </div>`;
-                });
-                html += `</div>`;
-            }
-            container.innerHTML = html;
 
-            // شغّل الـ observer على العناصر الجديدة
-            document.querySelectorAll('.fade-up:not(.visible)').forEach(el => observer.observe(el));
+            const orderedKeys = subCategoryOrder[category].filter(k => groups[k]);
+            const aspectRatio = category === 'video' ? '9/16' : '1/1';
+            let html = '';
+
+            /* Build lightbox registry */
+            _lbItems = [];
+            let lbOffset = 0;
+
+            orderedKeys.forEach((subCat, subIdx) => {
+                const rowId    = `sr-${category}-${subIdx}`;
+                const anchorId = `subcat-anchor-${subIdx}`;
+                html += `<h4 class="fs-1 ms-2 text-center my-4 fade-up" id="${anchorId}">${subCategoryTitles[subCat] || subCat}</h4>`;
+                const startOffset = lbOffset;
+                groups[subCat].forEach(item => { _lbItems.push(item); lbOffset++; });
+                html += buildSubcatRow(rowId, groups[subCat], aspectRatio, false, startOffset);
+            });
+
+            container.innerHTML = html;
+            container.querySelectorAll('.fade-up').forEach(el => window.siteObserver.observe(el));
+            updateSubcatPills(category, orderedKeys);
         }
 
-        window.showCategory = function(category, btn) {
+        /* FEATURE 7: Subcategory pills */
+        function updateSubcatPills(category, keys) {
+            const pillsEl = document.getElementById('subcat-pills');
+            if (!pillsEl) return;
+            if (!keys.length) { pillsEl.innerHTML = ''; return; }
+            pillsEl.innerHTML = keys.map((key, i) => {
+                const label = subCategoryTitles[key]
+                    ? subCategoryTitles[key].replace(/<br>/gi, ' / ')
+                    : key;
+                return `<button class="subcat-pill${i===0?' active-pill':''}" onclick="jumpSubcat(${i},this)">${label}</button>`;
+            }).join('');
+        }
+
+        window.jumpSubcat = function(idx, btn) {
+            document.querySelectorAll('.subcat-pill').forEach(p => p.classList.remove('active-pill'));
+            btn.classList.add('active-pill');
+            const anchor = document.getElementById(`subcat-anchor-${idx}`);
+            if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        /* Shared helper */
+        function _getGroups(category) {
+            const { allProjects: ap, subCategoryOrder: so } = window._portfolioData;
+            const filtered = ap.filter(p => p.mainCategory === category);
+            const groups = {};
+            filtered.forEach(item => {
+                if (!groups[item.subCategory]) groups[item.subCategory] = [];
+                groups[item.subCategory].push(item);
+            });
+            const orderedKeys = so[category].filter(k => groups[k]);
+            return { groups, orderedKeys };
+        }
+
+        window._showMore = function (rowId) {
+            const row = document.getElementById(rowId);
+            if (!row) return;
+            const parts      = rowId.split('-');
+            const category   = parts[1];
+            const subIdx     = parseInt(parts[2], 10);
+            const { groups, orderedKeys } = _getGroups(category);
+            const subCat     = orderedKeys[subIdx];
+            if (!subCat) return;
+            const aspectRatio = category === 'video' ? '9/16' : '1/1';
+            let lbOffset = 0;
+            for (let i = 0; i < subIdx; i++) { const sk = orderedKeys[i]; if (groups[sk]) lbOffset += groups[sk].length; }
+            row.outerHTML = buildSubcatRow(rowId, groups[subCat], aspectRatio, true, lbOffset);
+            const newRow = document.getElementById(rowId);
+            if (newRow) newRow.querySelectorAll('.fade-up').forEach(el => window.siteObserver.observe(el));
+        };
+
+        window._showLess = function (rowId) {
+            const row = document.getElementById(rowId);
+            if (!row) return;
+            const parts      = rowId.split('-');
+            const category   = parts[1];
+            const subIdx     = parseInt(parts[2], 10);
+            const { groups, orderedKeys } = _getGroups(category);
+            const subCat     = orderedKeys[subIdx];
+            if (!subCat) return;
+            const aspectRatio = category === 'video' ? '9/16' : '1/1';
+            let lbOffset = 0;
+            for (let i = 0; i < subIdx; i++) { const sk = orderedKeys[i]; if (groups[sk]) lbOffset += groups[sk].length; }
+            row.outerHTML = buildSubcatRow(rowId, groups[subCat], aspectRatio, false, lbOffset);
+            const newRow = document.getElementById(rowId);
+            if (newRow) newRow.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+        };
+
+        /* Category toggle */
+        window.showCategory = function (category, btn) {
             currentCategory = category;
             document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active-cat'));
             btn.classList.add('active-cat');
-            renderProjects(category);
+            document.getElementById('projectsContainer').style.display = 'none';
+            document.getElementById('loadingState').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('projectsContainer').style.display = 'block';
+                renderProjects(category);
+            }, 200);
         };
+
+        /* FEATURE 1: Lightbox */
+        window.openLightbox = function(idx) {
+            if (!_lbItems.length) return;
+            _lbIdx = Math.max(0, Math.min(idx, _lbItems.length - 1));
+            showLbItem();
+            document.getElementById('lightbox-overlay').classList.add('lb-open');
+            document.body.style.overflow = 'hidden';
+        };
+
+        function showLbItem() {
+            const item = _lbItems[_lbIdx];
+            const inner = document.getElementById('lightbox-inner');
+            const counter = document.getElementById('lb-counter');
+            if (!item) return;
+            const mediaUrl = optimizeUrl(item.url, item.type);
+            if (item.type === 'video') {
+                inner.innerHTML = `<video src="${mediaUrl}" controls autoplay style="max-width:88vw;max-height:85vh;border-radius:12px;display:block;object-fit:contain;background:#000;"></video>`;
+            } else {
+                inner.innerHTML = `<img src="${mediaUrl}" alt="Portfolio work" style="max-width:88vw;max-height:88vh;border-radius:12px;display:block;object-fit:contain;">`;
+            }
+            counter.textContent = `${_lbIdx + 1} / ${_lbItems.length}`;
+            document.getElementById('lb-prev').style.display = _lbIdx > 0 ? '' : 'none';
+            document.getElementById('lb-next').style.display = _lbIdx < _lbItems.length - 1 ? '' : 'none';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-overlay').classList.remove('lb-open');
+            document.getElementById('lightbox-inner').innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('lb-close').addEventListener('click', closeLightbox);
+        document.getElementById('lb-prev').addEventListener('click', () => { if (_lbIdx > 0) { _lbIdx--; showLbItem(); } });
+        document.getElementById('lb-next').addEventListener('click', () => { if (_lbIdx < _lbItems.length - 1) { _lbIdx++; showLbItem(); } });
+        document.getElementById('lightbox-overlay').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
+        document.addEventListener('keydown', function(e) {
+            const ov = document.getElementById('lightbox-overlay');
+            if (!ov.classList.contains('lb-open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft'  && _lbIdx > 0)                   { _lbIdx--; showLbItem(); }
+            if (e.key === 'ArrowRight' && _lbIdx < _lbItems.length - 1) { _lbIdx++; showLbItem(); }
+        });
+
+        /* FEATURE 9: Copy link */
+        window.copyLink = function(e, url) {
+            e.stopPropagation();
+            if (!url) return;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = e.currentTarget;
+                btn.classList.add('copied');
+                btn.innerHTML = COPY_SVG + ' Copied!';
+                window.showToast('تم نسخ الرابط! ✓', 'success');
+                setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = COPY_SVG + ' Copy'; }, 2000);
+            }).catch(() => window.showToast('فشل نسخ الرابط', 'error'));
+        };
+
+        /* FEATURE 4: Contact Form with EmailJS placeholder */
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = document.getElementById('cf-submit-btn');
+                const name    = document.getElementById('cf-name').value.trim();
+                const email   = document.getElementById('cf-email').value.trim();
+                const message = document.getElementById('cf-message').value.trim();
+                if (!name || !email || !message) {
+                    window.showToast('يرجى ملء جميع الحقول المطلوبة', 'error'); return;
+                }
+                btn.disabled = true;
+                btn.innerHTML = '<span class="btn-spinner"></span> Sending...';
+                /* Simulation – replace with real emailjs.sendForm() call */
+                setTimeout(() => {
+                    window.showToast('تم إرسال رسالتك بنجاح! 🎉', 'success');
+                    contactForm.reset();
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="btn-text">Send Message &#9993;</span>';
+                }, 1500);
+            });
+        }
 
         loadProjects();
     </script>
-</body>
 
+    <!-- Draggable WhatsApp FAB -->
+    <script>
+        (function () {
+            const fab = document.getElementById('whatsapp-fab');
+            if (!fab) return;
+            let dragging = false, didMove = false, startX, startY, origLeft, origBottom;
+
+            fab.addEventListener('mousedown', function (e) {
+                e.preventDefault(); dragging = true; didMove = false;
+                const rect = fab.getBoundingClientRect();
+                startX = e.clientX; startY = e.clientY;
+                origLeft = rect.left; origBottom = window.innerHeight - rect.bottom;
+                fab.style.cursor = 'grabbing';
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+            });
+            function onMouseMove(e) { if (dragging) moveTo(e.clientX - startX, e.clientY - startY); }
+            function onMouseUp() { dragging = false; fab.style.cursor = 'grab'; document.removeEventListener('mousemove', onMouseMove); document.removeEventListener('mouseup', onMouseUp); }
+
+            fab.addEventListener('touchstart', function (e) {
+                dragging = true; didMove = false;
+                const t = e.touches[0]; const rect = fab.getBoundingClientRect();
+                startX = t.clientX; startY = t.clientY;
+                origLeft = rect.left; origBottom = window.innerHeight - rect.bottom;
+                document.addEventListener('touchmove', onTouchMove, { passive: false });
+                document.addEventListener('touchend', onTouchEnd);
+            }, { passive: true });
+            function onTouchMove(e) { if (dragging) { e.preventDefault(); const t = e.touches[0]; moveTo(t.clientX - startX, t.clientY - startY); } }
+            function onTouchEnd() { dragging = false; document.removeEventListener('touchmove', onTouchMove); document.removeEventListener('touchend', onTouchEnd); }
+
+            function moveTo(dx, dy) {
+                if (Math.abs(dx) > 4 || Math.abs(dy) > 4) didMove = true;
+                const size = fab.offsetWidth;
+                let newLeft   = Math.max(0, Math.min(window.innerWidth  - size, origLeft   + dx));
+                let newBottom = Math.max(0, Math.min(window.innerHeight - size, origBottom - dy));
+                fab.style.right = 'auto'; fab.style.top = 'auto';
+                fab.style.left = newLeft + 'px'; fab.style.bottom = newBottom + 'px';
+            }
+            fab.addEventListener('click', function (e) { if (didMove) { e.preventDefault(); didMove = false; } });
+        })();
+    </script>
+
+    <!-- Scroll Progress, Glass Navbar, Back-to-Top, Scroll Spy, Stats Counter, Toast -->
+    <script>
+        /* Toast system */
+        function showToast(msg, type) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast-msg' + (type ? ' toast-' + type : '');
+            t.textContent = msg;
+            c.appendChild(t);
+            requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('toast-show')));
+            setTimeout(() => { t.classList.remove('toast-show'); setTimeout(() => t.remove(), 350); }, 3200);
+        }
+        window.showToast = showToast;
+
+        /* FEATURE 10: Scroll Progress Bar */
+        const progressBar = document.getElementById('scroll-progress');
+        function updateProgress() {
+            const scrolled = window.scrollY;
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+        }
+
+        /* FEATURE 13: Glass Navbar */
+        const navbarWrap = document.getElementById('navbar-wrap');
+        function updateNavbar() { navbarWrap.classList.toggle('scrolled', window.scrollY > 60); }
+
+        /* FEATURE 5: Back-to-Top */
+        const bttBtn = document.getElementById('back-to-top');
+        bttBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        function updateBtt() { bttBtn.classList.toggle('btt-visible', window.scrollY > 400); }
+
+        /* FEATURE 11: Scroll Spy */
+        const sections = ['home-page','Designs','about','contact'];
+        const navLinks  = document.querySelectorAll('.navbar-item');
+        function updateScrollSpy() {
+            let current = '';
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && window.scrollY >= el.offsetTop - 120) current = id;
+            });
+            navLinks.forEach(link => {
+                const sec = link.getAttribute('data-section');
+                link.classList.toggle('nav-active', sec === current);
+            });
+        }
+
+        /* Throttled scroll handler */
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateProgress();
+                    updateNavbar();
+                    updateBtt();
+                    updateScrollSpy();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        /* FEATURE 2: Animated Stats Counter */
+        function animateCounter(el) {
+            const target   = parseInt(el.dataset.target, 10);
+            const suffix   = el.dataset.suffix || '';
+            const duration = 1500;
+            const start    = performance.now();
+            function step(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(ease * target) + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.stat-num').forEach(animateCounter);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsRow = document.getElementById('stats-row');
+        if (statsRow) statsObserver.observe(statsRow);
+
+        /* FEATURE 8: PWA Install prompt */
+        let deferredInstallPrompt = null;
+        window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstallPrompt = e; });
+    </script>
+
+</body>
 </html>
